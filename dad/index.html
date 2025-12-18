@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>參選人姓名｜堅定行動，穩健前行</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@300;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* 修改為更有力量感的男性色調：深森林綠、古銅金、象牙灰 */
+      --bg-color: #f4f1ee;         /* 暖灰色背景 */
+      --primary-dark: #1a2a26;     /* 深森林綠 - 代表沉穩、經驗 */
+      --accent-gold: #b08d57;      /* 古銅金 - 代表質感、承諾 */
+      --text-main: #2c2c2c;
+      --spacing: 140px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Noto Sans TC', sans-serif;
+      letter-spacing: 0.02em;
+    }
+
+    /* 粗壯有力的明體標題 */
+    h1, h2, h3, .logo { font-family: 'Noto Serif TC', serif; font-weight: 900; }
+
+    /* 導覽列：深色系增加權威感 */
+    .navbar {
+      position: fixed; top: 0; width: 100%; height: 90px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 60px; z-index: 1000;
+      background: rgba(26, 42, 38, 0.95); /* 深色背景 */
+      backdrop-filter: blur(10px);
+      color: #fff;
+    }
+    .logo { font-size: 1.6rem; letter-spacing: 4px; color: var(--accent-gold); }
+    .nav-links { list-style: none; display: flex; gap: 40px; }
+    .nav-links a { text-decoration: none; color: rgba(255,255,255,0.8); font-size: 0.95rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--accent-gold); }
+
+    /* Hero Section：大氣、穩定的視覺 */
+    .hero {
+      height: 100vh; position: relative;
+      display: flex; align-items: center; padding-left: 10%;
+      overflow: hidden; background-color: var(--primary-dark);
+    }
+    .hero-bg {
+      position: absolute; right: 0; top: 0; width: 60%; height: 100%;
+      background: url('hero-man.jpg') center/cover; /* 這裡建議放半身形象照，色調深沉 */
+      mask-image: linear-gradient(to left, black 70%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to left, black 70%, transparent 100%);
+    }
+    .hero-content { position: relative; z-index: 2; color: #fff; max-width: 600px; }
+    .hero-content h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 20px; }
+    .hero-content p { font-size: 1.2rem; letter-spacing: 0.3em; color: var(--accent-gold); font-weight: 300; }
+
+    /* 區塊標題設計 */
+    .section-title { 
+      font-size: 3rem; margin-bottom: 60px; position: relative; 
+      color: var(--primary-dark);
+    }
+    .section-title::after {
+      content: ''; position: absolute; left: 0; bottom: -15px;
+      width: 80px; height: 6px; background: var(--accent-gold);
+    }
+
+    .section { padding: var(--spacing) 10%; }
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* 關於我：左右對齊的厚重感 */
+    .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 100px; align-items: start; }
+    .about-text h2 { font-size: 1.2rem; color: var(--accent-gold); letter-spacing: 5px; margin-bottom: 20px; }
+    .about-text p { font-size: 1.15rem; line-height: 2.2; color: #444; text-align: justify; }
+
+    /* 行動足跡：仿 But. 的方正大氣卡片 */
+    .experience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 50px; }
+    .card-link { text-decoration: none; color: inherit; }
+    .card {
+      position: relative; height: 600px; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 40px; background: var(--primary-dark);
+    }
+    .card-bg {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-size: cover; background-position: center; opacity: 0.6;
+      transition: 1s cubic-bezier(0.2, 1, 0.3, 1);
+    }
+    .card:hover .card-bg { opacity: 0.3; transform: scale(1.1); }
+    .card-content { position: relative; z-index: 2; color: #fff; border-top: 1px solid var(--accent-gold); padding-top: 20px; }
+    .card-content h3 { font-size: 1.8rem; margin-bottom: 10px; }
+    .card-content span { font-size: 0.85rem; letter-spacing: 3px; color: var(--accent-gold); }
+
+/* 最新消息樣式 */
+    .news-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      border-top: 1px solid #ddd;
+    }
+    .news-item {
+      display: flex;
+      align-items: center;
+      padding: 30px 0;
+      border-bottom: 1px solid #eee;
+      transition: 0.3s;
+    }
+    .news-item:hover {
+      background-color: #faf9f8;
+      padding-left: 20px;
+    }
+    .news-date {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 0.9rem;
+      color: var(--accent-gold);
+      width: 120px;
+      font-weight: 500;
+    }
+    .news-category {
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      background: var(--primary-dark);
+      color: #fff;
+      padding: 2px 10px;
+      margin-right: 30px;
+    }
+    .news-item h3 {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 500;
+      font-size: 1.1rem;
+      color: var(--text-main);
+      margin: 0;
+    }
+    .more-link {
+      color: var(--primary-dark);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      border-bottom: 1px solid var(--accent-gold);
+      padding-bottom: 5px;
+    }
+
+    @media (max-width: 768px) {
+      .news-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .news-date { width: auto; }
+    }
+
+
+    footer { background: var(--primary-dark); color: #fff; padding: 80px 10%; text-align: left; display: flex; justify-content: space-between; align-items: flex-end; }
+    .footer-logo { font-size: 2rem; color: var(--accent-gold); }
+
+    @media (max-width: 900px) {
+      .hero { padding-left: 5%; }
+      .hero-bg { width: 100%; opacity: 0.4; }
+      .about-grid, .experience-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">姓名｜NAME</div>
+    <ul class="nav-links">
+      <li><a href="#about">理念</a></li>
+      <li><a href="#experience">政績</a></li>
+      <li><a href="#contact">聯繫</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p>EXPERIENCE & ACTION</p>
+      <h1>穩健，<br>是為了走更遠的路。</h1>
+    </div>
+  </header>
+
+  <section id="about" class="section reveal">
+    <div class="about-grid">
+      <div class="section-title">關於我<br>VISION</div>
+      <div class="about-text">
+        <h2>在地深耕 · 專業領航</h2>
+        <p>
+          我是姓名。在公共事務領域服務多年，我深知參選不只是一場比賽，而是一份沈甸甸的責任。中年男性的肩膀上，扛著的是家庭的期待，更是對這片土地未來的承諾。
+        </p>
+        <p>
+          我追求的不是華麗的口號，而是紮實的改變。每一項政策的落地，都需具備厚實的經驗與穩定的判斷力。
+        </p>
+      </div>
+    </div>
+  </section>
+
+<section id="news" class="section reveal" style="background-color: #fff;">
+    <div class="news-header" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px;">
+      <h2 class="section-title" style="margin-bottom: 0;">最新動態<br>NEWS</h2>
+      <a href="#" class="more-link">VIEW ALL</a>
+    </div>
+
+    <div class="news-grid">
+      <div class="news-item">
+        <span class="news-date">2025.12.18</span>
+        <span class="news-category">活動紀實</span>
+        <h3>出席社區寒冬送暖座談，親聽基層心聲。</h3>
+      </div>
+
+      <div class="news-item">
+        <span class="news-date">2025.12.10</span>
+        <span class="news-category">政策發布</span>
+        <h3>針對在地交通動線優化，提出三項具體建議案。</h3>
+      </div>
+
+      <div class="news-item">
+        <span class="news-date">2025.12.05</span>
+        <span class="news-category">媒體報導</span>
+        <h3>接受在地廣播專訪，暢談未來十年城市願景。</h3>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="section reveal" style="background: #fff;">
+    <h2 class="section-title">行動足跡<br>TRACK RECORD</h2>
+    <div class="experience-grid">
+      
+      <a href="env.html" class="card-link">
+        <div class="card">
+          <div class="card-bg" style="background-image: url('env-bg.jpg');"></div>
+          <div class="card-content">
+            <span>01 / ENVIRONMENT</span>
+            <h3>改善在地環境</h3>
+          </div>
+        </div>
+      </a>
+
+      <a href="comm.html" class="card-link">
+        <div class="card">
+          <div class="card-bg" style="background-image: url('comm-bg.jpg');"></div>
+          <div class="card-content">
+            <span>02 / DIALOGUE</span>
+            <h3>強化溝通效率</h3>
+          </div>
+        </div>
+      </a>
+
+      <a href="res.html" class="card-link">
+        <div class="card">
+          <div class="card-bg" style="background-image: url('res-bg.jpg');"></div>
+          <div class="card-content">
+            <span>03 / RESOURCES</span>
+            <h3>爭取資源合作</h3>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div>
+      <div class="footer-logo">姓名</div>
+      <p style="margin-top: 10px; opacity: 0.6;">用專業與穩定，與您一起守護家園。</p>
+    </div>
+    <div style="text-align: right;">
+      <p>SERVICE OFFICE: 所在地點</p>
+      <p>TEL: 09XX-XXX-XXX</p>
+      <p style="margin-top: 20px; font-size: 0.7rem; opacity: 0.4;">© 2025 ALL RIGHTS RESERVED.</p>
+    </div>
+  </footer>
+
+  <script>
+    function reveal() {
+      var reveals = document.querySelectorAll(".reveal");
+      for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        if (elementTop < windowHeight - 100) {
+          reveals[i].classList.add("active");
+        }
+      }
+    }
+    window.addEventListener("scroll", reveal);
+    reveal();
+  </script>
+
+</body>
+</html>
